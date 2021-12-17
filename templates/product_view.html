@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="banner">
+                <div class="banner-text">
+                    <h1>Fresh Fruits</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+    <div class="col-md-6">
+        <h4>Add Product</h4>
+ <form method="POST" class="p-3 shadow">
+        {% csrf_token %}
+      <div class="form-group">
+          <input type="text" name="name" class="form-control" placeholder="Name of Product">
+      </div>
+     <div class="form-group">
+          <input type="text" name="rate" class="form-control" placeholder="Product Rate">
+      </div>
+     <div class="form-group">
+          <input type="datetime-local" name="datetime" class="form-control" placeholder="Your DateTime">
+      </div>
+          <input type="SUBMIT" class="btn btn-success">
+ </form>
+    </div>
+    <div class="col-md-6">
+        <h4>View of Product Details</h4>
+        {% for i in obj1 %}
+        <div class="shadow card">
+        <div class="card-body">
+            <div class="card-title">
+            <img src="{{i.img.url}}" alt="" style="height:150px;weight:150px">
+            <h5 >{{i.name}}</h5>
+            <p><b>{{i.rate}}</b></p>
+            <p><b>{{i.datetime}}</b></p>
+
+
+            <a class="btn btn-danger" href="{% url 'delete' i.id %}">DELETE</a>
+            <a class="btn btn-success" href="{% url 'update' i.id %}">UPDATE</a>
+            </div>
+        </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+ </div>
+</div>
+</div>
+{% endblock %}
